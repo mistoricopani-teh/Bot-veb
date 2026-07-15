@@ -1,0 +1,67 @@
+// Инициализируем Telegram WebApp
+const tg = window.Telegram.WebApp;
+tg.expand(); // Расширяем окно на весь экран телефона
+
+// Если открыто в Telegram, можно поприветствовать пользователя по имени
+if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+    document.getElementById('username').innerText = `Привет, ${tg.initDataUnsafe.user.first_name}!`;
+}
+
+// База данных ваших проектов
+const projects = [
+    {
+        id: 1,
+        title: "Ace Mobile: Nur Mosque",
+        category: "games",
+        emoji: "🕌",
+        description: "Мобильная игра с глубокой механикой. Реализована уникальная система Sadaqa (пожертвований) у входа в мечеть, где решения Имама влияют на развитие.",
+        link: "https://yourgame-link.com" // Ссылка на игру или пост о ней
+    },
+    {
+        id: 2,
+        title: "Telegram Портфолио Бот",
+        category: "bots",
+        emoji: "🤖",
+        description: "Интерактивный бот для демонстрации кейсов с полной интеграцией WebApp и мгновенным откликом.",
+        link: "https://t.me/your_bot"
+    }
+];
+
+// Функция для отрисовки карточек на экране
+function displayProjects(items) {
+    const container = document.getElementById('projects-container');
+    container.innerHTML = "";
+
+    items.forEach(proj => {
+        const card = document.createElement('div');
+        card.classList.add('project-card');
+        
+        card.innerHTML = `
+            <div class="project-img">${proj.emoji}</div>
+            <div class="project-info">
+                <h3>${proj.title}</h3>
+                <p>${proj.description}</p>
+                <a href="${proj.link}" target="_blank" class="project-btn">Посмотреть проект</a>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// Функция фильтрации (Все / Игры / Боты)
+function filterProjects(category) {
+    // Меняем активный класс у кнопок
+    const buttons = document.querySelectorAll('.cat-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    if (category === 'all') {
+        displayProjects(projects);
+    } else {
+        const filtered = projects.filter(p => p.category === category);
+        displayProjects(filtered);
+    }
+}
+
+// Первая инициализация — показываем все проекты
+displayProjects(projects);
