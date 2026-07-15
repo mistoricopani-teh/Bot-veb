@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наше Портфолио</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="profile-header">
+            <div class="avatar">🚀</div>
+            <h1 id="username">Наши Проекты</h1>
+            <p class="subtitle">Разработка игр, ботов и веб-приложений</p>
+        </header>
+
+        <nav class="categories">
+            <button class="cat-btn active" onclick="filterProjects('all')">Все</button>
+            <button class="cat-btn" onclick="filterProjects('games')">Игры</button>
+            <button class="cat-btn" onclick="filterProjects('bots')">Боты</button>
+        </nav>
+
+        <main class="projects-grid" id="projects-container">
+            </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
